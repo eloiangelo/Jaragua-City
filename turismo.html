@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turismo em Angelópolis | Prefeitura Municipal</title>
+<meta name="description" content="Pontos turísticos, roteiro sugerido e agenda de eventos de Angelópolis — Serra Azul, MG.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde-serra: #0F4C43;
+    --verde-serra-escuro: #0A332D;
+    --dourado-cafe: #C08A28;
+    --dourado-claro: #E3B45B;
+    --creme-pedra: #F6F1E7;
+    --branco-neblina: #FFFDF8;
+    --tinta: #1C2321;
+    --pedra-media: #63705F;
+    --linha: #E1D9C6;
+    --sombra: 0 20px 50px -25px rgba(15,76,67,0.35);
+    --radius: 4px;
+    --max: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+  body{margin:0; font-family:'Inter', sans-serif; color:var(--tinta); background:var(--creme-pedra); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Fraunces', serif; font-weight:600; line-height:1.1; margin:0; color:var(--verde-serra-escuro);}
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  .eyebrow{font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--dourado-cafe); font-weight:500; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--dourado-cafe); display:inline-block;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:var(--radius); font-weight:600; font-size:0.92rem; border:1px solid transparent; transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;}
+  .btn-primario{background:var(--dourado-cafe); color:var(--branco-neblina);}
+  .btn-primario:hover{background:var(--dourado-claro); transform:translateY(-2px); box-shadow:0 12px 24px -12px rgba(192,138,40,.6);}
+  .btn-fantasma{border-color:rgba(255,253,248,.4); color:var(--branco-neblina);}
+  .btn-fantasma:hover{background:rgba(255,253,248,.12); transform:translateY(-2px);}
+  .btn-linha{border-color:var(--verde-serra); color:var(--verde-serra);}
+  .btn-linha:hover{background:var(--verde-serra); color:var(--branco-neblina);}
+
+  /* Header simplificado */
+  header{position:sticky; top:0; z-index:100; background:rgba(246,241,231,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--linha);}
+  nav.principal{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
+  .marca{display:flex; align-items:center; gap:12px;}
+  .brasao{width:40px; height:40px; flex-shrink:0;}
+  .marca-texto{display:flex; flex-direction:column; line-height:1.15;}
+  .marca-texto strong{font-family:'Fraunces', serif; font-size:1.1rem; color:var(--verde-serra-escuro); font-weight:600;}
+  .marca-texto span{font-family:'JetBrains Mono', monospace; font-size:0.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--pedra-media);}
+
+  /* Banner interno */
+  .banner{background:linear-gradient(180deg, var(--verde-serra) 0%, var(--verde-serra-escuro) 100%); color:var(--branco-neblina); padding:64px 0 54px;}
+  .trilha{font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:rgba(255,253,248,.6); margin-bottom:16px;}
+  .trilha a{color:var(--dourado-claro);}
+  .trilha a:hover{text-decoration:underline;}
+  .banner h1{color:var(--branco-neblina); font-size:clamp(2.1rem,4vw,3.1rem); max-width:16ch; margin-bottom:16px;}
+  .banner p.lead{color:rgba(255,253,248,.82); max-width:52ch; font-size:1.02rem; margin-bottom:30px;}
+  .banner-stats{display:flex; gap:40px; flex-wrap:wrap; border-top:1px solid rgba(255,253,248,.18); padding-top:20px;}
+  .banner-stats div strong{font-family:'Fraunces', serif; font-size:1.5rem; display:block; color:var(--dourado-claro);}
+  .banner-stats div span{font-family:'JetBrains Mono', monospace; font-size:0.64rem; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,253,248,.65);}
+  .divisor{display:block; width:100%; line-height:0;}
+  .divisor svg{width:100%; height:auto;}
+
+  section{padding:80px 0;}
+  .cabecalho-secao{max-width:640px; margin-bottom:44px;}
+  .cabecalho-secao h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-top:14px;}
+  .cabecalho-secao p{color:var(--pedra-media); margin-top:14px; font-size:1rem;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.visivel{opacity:1; transform:none;}
+
+  #pontos{background:var(--creme-pedra);}
+  .turismo-topo{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:36px;}
+  .filtros{display:flex; gap:10px; flex-wrap:wrap;}
+  .filtro{padding:9px 18px; border-radius:999px; border:1px solid var(--linha); font-size:0.84rem; font-weight:600; color:var(--pedra-media); background:var(--branco-neblina); transition:.25s;}
+  .filtro.ativo, .filtro:hover{background:var(--verde-serra); color:var(--branco-neblina); border-color:var(--verde-serra);}
+  .grade-turismo{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .card-ponto{background:var(--branco-neblina); border:1px solid var(--linha); border-radius:var(--radius); overflow:hidden; transition:transform .3s ease, box-shadow .3s ease; display:flex; flex-direction:column;}
+  .card-ponto:hover{transform:translateY(-6px); box-shadow:var(--sombra);}
+  .card-ponto .capa{height:150px; width:100%;}
+  .card-ponto .conteudo{padding:22px 22px 26px; display:flex; flex-direction:column; gap:10px; flex:1;}
+  .tag-categoria{font-family:'JetBrains Mono', monospace; font-size:0.64rem; text-transform:uppercase; letter-spacing:.08em; color:var(--dourado-cafe); font-weight:500;}
+  .card-ponto h3{font-size:1.18rem;}
+  .card-ponto p{color:var(--pedra-media); font-size:0.92rem; flex:1;}
+  .card-ponto .rodape-card{display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--pedra-media); border-top:1px dashed var(--linha); padding-top:12px; margin-top:6px;}
+
+  #roteiro{background:var(--branco-neblina); border-top:1px solid var(--linha); border-bottom:1px solid var(--linha);}
+  .roteiro-caixa{background:var(--verde-serra); color:var(--branco-neblina); border-radius:var(--radius); padding:48px; display:grid; grid-template-columns:0.8fr 1.2fr; gap:48px;}
+  .roteiro-caixa h2{color:var(--branco-neblina); font-size:1.8rem; margin-bottom:14px;}
+  .roteiro-caixa > div:first-child p{color:rgba(255,253,248,.78); font-size:0.95rem; margin-bottom:22px;}
+  .dias-roteiro{display:flex; flex-direction:column; gap:18px;}
+  .dia{display:grid; grid-template-columns:70px 1fr; gap:16px; padding-bottom:18px; border-bottom:1px solid rgba(255,253,248,.15);}
+  .dia:last-child{border-bottom:none; padding-bottom:0;}
+  .dia .rotulo-dia{font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--dourado-claro); text-transform:uppercase;}
+  .dia p{color:rgba(255,253,248,.85); font-size:0.92rem;}
+  .dia strong{display:block; color:var(--branco-neblina); font-family:'Fraunces',serif; font-weight:500; margin-bottom:4px;}
+
+  #agenda{background:var(--creme-pedra);}
+  .agenda{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .evento{background:var(--branco-neblina); border:1px solid var(--linha); border-radius:var(--radius); padding:22px; display:flex; flex-direction:column; gap:10px;}
+  .data-evento{display:flex; flex-direction:column; align-items:flex-start; font-family:'Fraunces', serif; color:var(--verde-serra);}
+  .data-evento .dia-num{font-size:1.7rem; font-weight:600; line-height:1;}
+  .data-evento .mes{font-family:'JetBrains Mono', monospace; font-size:0.68rem; text-transform:uppercase; color:var(--dourado-cafe); letter-spacing:.08em;}
+  .evento h4{font-size:1rem;}
+  .evento p{font-size:0.85rem; color:var(--pedra-media);}
+
+  footer{background:var(--verde-serra-escuro); color:rgba(255,253,248,.65); padding:34px 0;}
+  .footer-simples{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:0.82rem;}
+  .footer-simples .marca-footer{display:flex; align-items:center; gap:10px;}
+  .footer-simples .marca-footer strong{color:var(--branco-neblina); font-family:'Fraunces',serif; font-size:0.98rem;}
+
+  #conheca{background:var(--branco-neblina); border-bottom:1px solid var(--linha);}
+  .conheca-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;}
+  .chips-jogo{display:flex; gap:10px; flex-wrap:wrap; margin:22px 0 28px;}
+  .chip{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+    padding:8px 14px; border-radius:999px; background:var(--creme-pedra);
+    border:1px solid var(--linha); color:var(--pedra-media);
+  }
+  .conheca-cta{display:flex; align-items:center; gap:16px; flex-wrap:wrap;}
+  .badge-em-breve{
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; text-transform:uppercase;
+    letter-spacing:.06em; color:var(--dourado-cafe); font-weight:600;
+  }
+  .mapa-caixa{
+    position:relative; aspect-ratio:4/3; border-radius:var(--radius);
+    border:1px solid var(--linha); background:var(--creme-pedra);
+    overflow:hidden; box-shadow:var(--sombra);
+  }
+  .mapa-caixa img{width:100%; height:100%; object-fit:cover; display:block;}
+  .selo-jogo{
+    position:absolute; top:14px; left:14px;
+    background:var(--verde-serra); color:var(--branco-neblina);
+    font-family:'JetBrains Mono', monospace; font-size:0.66rem; font-weight:600;
+    padding:6px 12px; border-radius:999px; display:flex; align-items:center; gap:6px;
+  }
+
+  @media (max-width:980px){
+    .conheca-grid{grid-template-columns:1fr;}
+    .grade-turismo{grid-template-columns:repeat(2,1fr);}
+    .roteiro-caixa{grid-template-columns:1fr; padding:32px;}
+    .agenda{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:620px){
+    .grade-turismo{grid-template-columns:1fr;}
+    .agenda{grid-template-columns:1fr;}
+    .banner-stats{gap:24px;}
+    section{padding:56px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="principal wrap">
+    <a href="angelopolis.html" class="marca">
+      <svg class="brasao" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 3 L43 12 V24 C43 35 35 42 24 45 C13 42 5 35 5 24 V12 Z" fill="#0F4C43" stroke="#C08A28" stroke-width="1.5"/>
+        <path d="M14 30 L20 18 L24 26 L28 16 L34 30" stroke="#E3B45B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="12" r="2.4" fill="#E3B45B"/>
+      </svg>
+      <span class="marca-texto">
+        <strong>Angelópolis</strong>
+        <span>Prefeitura Municipal</span>
+      </span>
+    </a>
+    <a href="angelopolis.html" class="btn btn-linha">← Voltar ao início</a>
+  </nav>
+</header>
+
+<div class="banner">
+  <div class="wrap">
+    <p class="trilha"><a href="angelopolis.html">Início</a> / Turismo</p>
+    <p class="eyebrow" style="color:var(--dourado-claro);">Turismo em Angelópolis</p>
+    <h1>Serra, água e história para explorar</h1>
+    <p class="lead">Seis roteiros oficiais, chancelados pela Secretaria de Turismo, para conhecer o melhor do município — da natureza preservada ao patrimônio histórico.</p>
+    <div class="banner-stats">
+      <div><strong>6</strong><span>Pontos oficiais</span></div>
+      <div><strong>4</strong><span>Eventos programados</span></div>
+      <div><strong>2 dias</strong><span>Roteiro sugerido</span></div>
+    </div>
+  </div>
+  <div class="divisor">
+    <svg viewBox="0 0 1200 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 34 L100 8 L220 38 L340 12 L460 34 L600 5 L740 36 L860 15 L980 37 L1100 10 L1200 32 L1200 50 L0 50 Z" fill="#F6F1E7"/>
+    </svg>
+  </div>
+</div>
+
+
+<section id="pontos">
+  <div class="wrap">
+    <div class="turismo-topo reveal">
+      <div class="cabecalho-secao" style="margin-bottom:0;">
+        <p class="eyebrow">Pontos turísticos</p>
+        <h2>Onde ir em Angelópolis</h2>
+      </div>
+      <div class="filtros" id="filtros">
+        <button class="filtro ativo" data-filtro="todos">Todos</button>
+        <button class="filtro" data-filtro="natureza">Natureza</button>
+        <button class="filtro" data-filtro="historia">Patrimônio histórico</button>
+        <button class="filtro" data-filtro="cultura">Cultura &amp; feiras</button>
+      </div>
+    </div>
+
+    <div class="grade-turismo" id="gradeTurismo">
+
+      <div class="card-ponto reveal" data-categoria="natureza">
+        <svg class="capa" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="150" fill="#0F4C43"/>
+          <path d="M0 110 L80 60 L160 100 L240 40 L320 90 L400 55 L400 150 L0 150 Z" fill="#0A332D"/>
+          <line x1="190" y1="20" x2="190" y2="120" stroke="#FFFDF8" stroke-width="3" opacity="0.8"/>
+        </svg>
+        <div class="conteudo">
+          <span class="tag-categoria">Natureza</span>
+          <h3>Cachoeira do Véu da Noiva</h3>
+          <p>Queda d'água de 38 metros cercada por mata atlântica preservada, com trilha leve de 900 m e piscina natural na base.</p>
+          <div class="rodape-card"><span>⏱ 40 min de trilha</span><span>★ 4.8</span></div>
+        </div>
+      </div>
+
+      <div class="card-ponto reveal" data-categoria="historia">
+        <svg class="capa" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="150" fill="#C08A28"/>
+          <rect x="150" y="50" width="100" height="80" fill="#F6F1E7"/>
+          <polygon points="140,50 260,50 200,15" fill="#0A332D"/>
+          <rect x="190" y="90" width="20" height="40" fill="#0A332D"/>
+          <rect x="220" y="40" width="14" height="55" fill="#F6F1E7"/>
+          <polygon points="214,40 240,40 227,20" fill="#0A332D"/>
+        </svg>
+        <div class="conteudo">
+          <span class="tag-categoria">Patrimônio histórico</span>
+          <h3>Igreja Matriz de Santo Antônio</h3>
+          <p>Construída em 1924, reúne acervo de arte sacra colonial e mirante na torre com vista para todo o Centro Histórico.</p>
+          <div class="rodape-card"><span>🕑 Ter–Dom, 9h–17h</span><span>★ 4.7</span></div>
+        </div>
+      </div>
+
+      <div class="card-ponto reveal" data-categoria="natureza">
+        <svg class="capa" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="150" fill="#63705F"/>
+          <path d="M0 120 L100 50 L200 100 L300 30 L400 90 L400 150 L0 150 Z" fill="#0F4C43"/>
+          <circle cx="330" cy="45" r="18" fill="#E3B45B"/>
+        </svg>
+        <div class="conteudo">
+          <span class="tag-categoria">Natureza</span>
+          <h3>Mirante da Serra Azul</h3>
+          <p>Ponto mais alto do município, com vista panorâmica de 360° — famoso pelo nascer do sol e voos de parapente.</p>
+          <div class="rodape-card"><span>⏱ 1h20 de trilha</span><span>★ 4.9</span></div>
+        </div>
+      </div>
+
+      <div class="card-ponto reveal" data-categoria="cultura">
+        <svg class="capa" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="150" fill="#0A332D"/>
+          <circle cx="90" cy="75" r="55" fill="#C08A28" opacity="0.5"/>
+          <circle cx="200" cy="75" r="70" fill="#C08A28" opacity="0.4"/>
+          <circle cx="320" cy="75" r="55" fill="#C08A28" opacity="0.5"/>
+        </svg>
+        <div class="conteudo">
+          <span class="tag-categoria">Cultura &amp; feiras</span>
+          <h3>Vale do Café Histórico</h3>
+          <p>Roteiro por três fazendas centenárias com museu do café, degustação e trilhas entre os cafezais em terraço.</p>
+          <div class="rodape-card"><span>🕑 Qui–Dom, 8h–16h</span><span>★ 4.6</span></div>
+        </div>
+      </div>
+
+      <div class="card-ponto reveal" data-categoria="natureza">
+        <svg class="capa" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="150" fill="#1C2321"/>
+          <path d="M0 100 Q100 40 200 100 T400 100 L400 150 L0 150 Z" fill="#0F4C43"/>
+          <rect x="60" y="70" width="6" height="60" fill="#0A332D"/>
+          <rect x="140" y="50" width="6" height="80" fill="#0A332D"/>
+          <rect x="230" y="65" width="6" height="65" fill="#0A332D"/>
+          <rect x="310" y="55" width="6" height="75" fill="#0A332D"/>
+        </svg>
+        <div class="conteudo">
+          <span class="tag-categoria">Natureza</span>
+          <h3>Parque Municipal das Araucárias</h3>
+          <p>52 hectares de mata preservada, com trilhas sinalizadas, área de piquenique e observação de aves nativas.</p>
+          <div class="rodape-card"><span>🕑 Todos os dias, 7h–18h</span><span>★ 4.7</span></div>
+        </div>
+      </div>
+
+      <div class="card-ponto reveal" data-categoria="cultura">
+        <svg class="capa" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="150" fill="#E3B45B"/>
+          <rect x="30" y="60" width="60" height="50" fill="#0F4C43"/>
+          <rect x="110" y="50" width="60" height="60" fill="#0A332D"/>
+          <rect x="190" y="65" width="60" height="45" fill="#C08A28"/>
+          <rect x="270" y="55" width="60" height="55" fill="#0F4C43"/>
+        </svg>
+        <div class="conteudo">
+          <span class="tag-categoria">Cultura &amp; feiras</span>
+          <h3>Feira de Artesanato do Rosário</h3>
+          <p>Tradicional feira aos sábados na Praça do Rosário, com cerâmica, tecelagem e doces artesanais da região.</p>
+          <div class="rodape-card"><span>🕑 Sáb, 8h–14h</span><span>★ 4.5</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="conheca">
+  <div class="wrap conheca-grid">
+    <div class="reveal">
+      <p class="eyebrow">Descubra a cidade</p>
+      <h2 style="font-size:clamp(1.7rem,3vw,2.3rem); margin:14px 0 18px;">Conheça Angelópolis jogando!</h2>
+      <p style="color:var(--pedra-media); font-size:1rem; max-width:52ch;">Em vez de só ler sobre a cidade, você vai <strong style="color:var(--verde-serra-escuro);">correr por ela</strong>. Um jogo de perseguição policial acelerado pelas ruas reais de Angelópolis — cada curva, praça e bairro do mapa turístico vira parte da fuga. <em>Quem escapa?</em></p>
+      <div class="chips-jogo">
+        <span class="chip">🚓 Perseguição policial</span>
+        <span class="chip">🗺️ Ruas reais da cidade</span>
+        <span class="chip">🏁 Quem pontua mais vence</span>
+      </div>
+      <div class="conheca-cta">
+        <a href="#" class="btn btn-primario">Jogar Perseguição em Angelópolis</a>
+        <a href="#" class="btn btn-linha">🏆 Top 10 jogadores</a>
+      </div>
+      <span class="badge-em-breve" style="display:inline-block; margin-top:16px;">Em desenvolvimento · Powered by Claude</span>
+    </div>
+    <div class="mapa-caixa reveal">
+      <span class="selo-jogo">🎮 Modo Jogo</span>
+      <img src="perseguicao-angelopolis.jpg" alt="Capa do jogo Perseguição em Angelópolis: carro de polícia perseguindo um carro esportivo vermelho sobre o mapa ilustrado da cidade">
+    </div>
+  </div>
+</section>
+
+<section id="roteiro">
+  <div class="wrap">
+    <div class="roteiro-caixa reveal">
+      <div>
+        <p class="eyebrow" style="color:#E3B45B;">Roteiro sugerido</p>
+        <h2>Angelópolis em 2 dias</h2>
+        <p>Um roteiro guiado pela Secretaria de Turismo para quem tem um fim de semana e quer sentir o melhor da cidade.</p>
+        <a href="angelopolis.html#contato" class="btn btn-fantasma">Solicitar guia local</a>
+      </div>
+      <div class="dias-roteiro">
+        <div class="dia">
+          <span class="rotulo-dia">Dia 1 · Manhã</span>
+          <div>
+            <strong>Centro Histórico a pé</strong>
+            <p>Igreja Matriz, Casario do Rosário e Museu Municipal — encerrando na Feira de Artesanato (se for sábado).</p>
+          </div>
+        </div>
+        <div class="dia">
+          <span class="rotulo-dia">Dia 1 · Tarde</span>
+          <div>
+            <strong>Vale do Café Histórico</strong>
+            <p>Visita guiada a uma fazenda centenária, com degustação e pôr do sol entre os terraços de café.</p>
+          </div>
+        </div>
+        <div class="dia">
+          <span class="rotulo-dia">Dia 2 · Manhã</span>
+          <div>
+            <strong>Cachoeira do Véu da Noiva</strong>
+            <p>Trilha leve até a queda d'água — leve roupa de banho e chegue cedo para evitar o movimento.</p>
+          </div>
+        </div>
+        <div class="dia">
+          <span class="rotulo-dia">Dia 2 · Tarde</span>
+          <div>
+            <strong>Mirante da Serra Azul</strong>
+            <p>Encerre o roteiro com a vista panorâmica da Serra Azul, ideal para o pôr do sol.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agenda">
+  <div class="wrap">
+    <div class="cabecalho-secao reveal">
+      <p class="eyebrow">Agenda turística</p>
+      <h2>Próximos eventos</h2>
+    </div>
+    <div class="agenda reveal">
+      <div class="evento">
+        <div class="data-evento"><span class="dia-num">12</span><span class="mes">Setembro</span></div>
+        <h4>Encontro de Trilheiros</h4>
+        <p>Caminhada coletiva com guias credenciados pelas trilhas da Serra Azul.</p>
+      </div>
+      <div class="evento">
+        <div class="data-evento"><span class="dia-num">03</span><span class="mes">Outubro</span></div>
+        <h4>Festival das Cachoeiras</h4>
+        <p>Três dias de música, gastronomia local e visitas guiadas às quedas d'água do município.</p>
+      </div>
+      <div class="evento">
+        <div class="data-evento"><span class="dia-num">21</span><span class="mes">Novembro</span></div>
+        <h4>Feira Gastronômica do Café</h4>
+        <p>Produtores locais apresentam cafés especiais premiados em concursos regionais.</p>
+      </div>
+      <div class="evento">
+        <div class="data-evento"><span class="dia-num">08</span><span class="mes">Dezembro</span></div>
+        <h4>Natal Luz de Angelópolis</h4>
+        <p>Iluminação especial do Centro Histórico e presépio vivo na Praça do Rosário.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-simples">
+    <div class="marca-footer">
+      <svg class="brasao" viewBox="0 0 48 48" width="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 3 L43 12 V24 C43 35 35 42 24 45 C13 42 5 35 5 24 V12 Z" fill="#0F4C43" stroke="#C08A28" stroke-width="1.5"/>
+        <path d="M14 30 L20 18 L24 26 L28 16 L34 30" stroke="#E3B45B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <strong>Prefeitura de Angelópolis</strong>
+    </div>
+    <span>© 2026 · Cidade fictícia — conteúdo de demonstração.</span>
+    <a href="angelopolis.html" class="btn btn-linha" style="border-color:rgba(255,253,248,.4); color:var(--branco-neblina);">← Voltar ao início</a>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visivel');
+        observador.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observador.observe(el));
+
+  // Filtro de turismo
+  const filtros = document.querySelectorAll('.filtro');
+  const cards = document.querySelectorAll('#gradeTurismo .card-ponto');
+  filtros.forEach(botao => {
+    botao.addEventListener('click', () => {
+      filtros.forEach(b => b.classList.remove('ativo'));
+      botao.classList.add('ativo');
+      const alvo = botao.dataset.filtro;
+      cards.forEach(card => {
+        const mostrar = alvo === 'todos' || card.dataset.categoria === alvo;
+        card.style.display = mostrar ? 'flex' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prefeitura Municipal de Angelópolis | Portal Oficial</title>
+<meta name="description" content="Portal oficial da Prefeitura de Angelópolis — serviços, secretarias, notícias e turismo na Serra Azul.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde-serra: #0F4C43;
+    --verde-serra-escuro: #0A332D;
+    --dourado-cafe: #C08A28;
+    --dourado-claro: #E3B45B;
+    --creme-pedra: #F6F1E7;
+    --branco-neblina: #FFFDF8;
+    --tinta: #1C2321;
+    --pedra-media: #63705F;
+    --linha: #E1D9C6;
+    --sombra: 0 20px 50px -25px rgba(15,76,67,0.35);
+    --radius: 4px;
+    --max: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+  body{
+    margin:0;
+    font-family:'Inter', sans-serif;
+    color:var(--tinta);
+    background:var(--creme-pedra);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.1;
+    margin:0;
+    color:var(--verde-serra-escuro);
+  }
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--dourado-cafe);
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--dourado-cafe);
+    display:inline-block;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 26px;
+    border-radius:var(--radius);
+    font-weight:600;
+    font-size:0.92rem;
+    border:1px solid transparent;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+  }
+  .btn-primario{background:var(--dourado-cafe); color:var(--branco-neblina);}
+  .btn-primario:hover{background:var(--dourado-claro); transform:translateY(-2px); box-shadow:0 12px 24px -12px rgba(192,138,40,.6);}
+  .btn-fantasma{border-color:rgba(255,253,248,.4); color:var(--branco-neblina);}
+  .btn-fantasma:hover{background:rgba(255,253,248,.12); transform:translateY(-2px);}
+  .btn-linha{border-color:var(--verde-serra); color:var(--verde-serra);}
+  .btn-linha:hover{background:var(--verde-serra); color:var(--branco-neblina);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(246,241,231,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--linha);
+  }
+  .topbar{
+    background:var(--verde-serra-escuro);
+    color:rgba(255,253,248,.75);
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+  }
+  .topbar .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:7px; padding-bottom:7px;
+    flex-wrap:wrap; gap:6px;
+  }
+  .topbar a{color:var(--dourado-claro);}
+  nav.principal{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 0;
+  }
+  .marca{display:flex; align-items:center; gap:12px;}
+  .brasao{width:44px; height:44px; flex-shrink:0;}
+  .marca-texto{display:flex; flex-direction:column; line-height:1.15;}
+  .marca-texto strong{font-family:'Fraunces', serif; font-size:1.15rem; color:var(--verde-serra-escuro); font-weight:600;}
+  .marca-texto span{font-family:'JetBrains Mono', monospace; font-size:0.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--pedra-media);}
+  .menu{display:flex; align-items:center; gap:34px;}
+  .menu a{
+    font-size:0.9rem; font-weight:600; color:var(--tinta);
+    position:relative; padding:4px 0;
+  }
+  .menu a::after{
+    content:""; position:absolute; left:0; bottom:-2px;
+    width:0; height:2px; background:var(--dourado-cafe);
+    transition:width .25s ease;
+  }
+  .menu a:hover::after{width:100%;}
+  .menu-toggle{display:none; background:none; border:none; padding:6px;}
+  .menu-toggle span{display:block; width:24px; height:2px; background:var(--verde-serra-escuro); margin:5px 0; transition:.3s;}
+
+  @media (max-width:880px){
+    .menu{
+      position:fixed; inset:0 0 0 auto; height:100vh; width:min(78vw,320px);
+      background:var(--branco-neblina); flex-direction:column; align-items:flex-start;
+      padding:100px 32px 32px; gap:26px; transform:translateX(100%);
+      transition:transform .35s ease; box-shadow:-20px 0 40px rgba(0,0,0,.15);
+    }
+    .menu.aberto{transform:translateX(0);}
+    .menu-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background:linear-gradient(180deg, var(--verde-serra) 0%, var(--verde-serra-escuro) 100%);
+    color:var(--branco-neblina);
+    padding:88px 0 0;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+    position:relative; z-index:2;
+  }
+  .hero h1{
+    color:var(--branco-neblina);
+    font-size:clamp(2.4rem, 4.6vw, 4rem);
+    margin:18px 0 22px;
+    max-width:14ch;
+  }
+  .hero h1 em{font-style:italic; color:var(--dourado-claro);}
+  .hero p.lead{max-width:46ch; color:rgba(255,253,248,.82); font-size:1.05rem; margin-bottom:34px;}
+  .hero-cta{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:56px;}
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    border-top:1px solid rgba(255,253,248,.18);
+    padding-top:22px; margin-bottom:60px;
+  }
+  .hero-stats div + div{border-left:1px solid rgba(255,253,248,.18); padding-left:22px;}
+  .hero-stats strong{font-family:'Fraunces', serif; font-size:1.7rem; display:block; color:var(--dourado-claro);}
+  .hero-stats span{font-family:'JetBrains Mono', monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,253,248,.65);}
+
+  .hero-arte{position:relative; height:100%; min-height:320px;}
+  .rio{
+    stroke-dasharray:6 10; animation:fluir 3.4s linear infinite;
+  }
+  @keyframes fluir{to{stroke-dashoffset:-160;}}
+
+  .divisor{display:block; width:100%; line-height:0; margin-top:40px;}
+  .divisor svg{width:100%; height:auto;}
+
+  /* ---------- SECTIONS GERAL ---------- */
+  section{padding:96px 0;}
+  .cabecalho-secao{max-width:640px; margin-bottom:52px;}
+  .cabecalho-secao h2{font-size:clamp(1.9rem,3.2vw,2.6rem); margin-top:14px;}
+  .cabecalho-secao p{color:var(--pedra-media); margin-top:16px; font-size:1.02rem;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.visivel{opacity:1; transform:none;}
+
+  /* ---------- A CIDADE ---------- */
+  #cidade{background:var(--branco-neblina); border-bottom:1px solid var(--linha);}
+  .cidade-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+  .cidade-texto p{color:var(--pedra-media); margin-bottom:16px;}
+  .cidade-texto p:last-child{margin-bottom:0;}
+  .linha-tempo{border-left:2px solid var(--linha); padding-left:22px; display:flex; flex-direction:column; gap:22px;}
+  .linha-tempo li{position:relative;}
+  .linha-tempo li::before{
+    content:""; position:absolute; left:-27px; top:5px;
+    width:10px; height:10px; border-radius:50%; background:var(--dourado-cafe);
+    border:2px solid var(--branco-neblina); box-shadow:0 0 0 2px var(--dourado-cafe);
+  }
+  .linha-tempo b{font-family:'JetBrains Mono', monospace; color:var(--verde-serra); font-size:0.8rem; display:block; margin-bottom:2px;}
+  .linha-tempo span{color:var(--pedra-media); font-size:0.94rem;}
+
+  /* ---------- SERVIÇOS / SECRETARIAS ---------- */
+  #secretarias{background:var(--verde-serra-escuro); color:var(--branco-neblina);}
+  #secretarias .cabecalho-secao h2{color:var(--branco-neblina);}
+  #secretarias .cabecalho-secao p{color:rgba(255,253,248,.7);}
+  #secretarias .eyebrow{color:var(--dourado-claro);}
+  #secretarias .eyebrow::before{background:var(--dourado-claro);}
+  .grade-servicos{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,253,248,.14); border:1px solid rgba(255,253,248,.14);}
+  .servico{
+    background:var(--verde-serra-escuro); padding:30px 26px; transition:background .25s ease;
+    display:flex; flex-direction:column; gap:14px; min-height:170px;
+  }
+  .servico:hover{background:var(--verde-serra);}
+  .servico svg{width:30px; height:30px; stroke:var(--dourado-claro);}
+  .servico h4{color:var(--branco-neblina); font-size:1.02rem;}
+  .servico p{color:rgba(255,253,248,.62); font-size:0.82rem;}
+
+  /* ---------- NOTÍCIAS ---------- */
+  #noticias{background:var(--branco-neblina); border-bottom:1px solid var(--linha);}
+  .grade-noticias{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:26px;}
+  .noticia{border:1px solid var(--linha); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; transition:box-shadow .25s ease, transform .25s ease;}
+  .noticia:hover{box-shadow:var(--sombra); transform:translateY(-4px);}
+  .noticia .capa{height:170px;}
+  .noticia.destaque .capa{height:230px;}
+  .noticia .conteudo{padding:22px; display:flex; flex-direction:column; gap:10px; flex:1;}
+  .noticia .data-noticia{font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--dourado-cafe); text-transform:uppercase; letter-spacing:.06em;}
+  .noticia h3{font-size:1.08rem;}
+  .noticia.destaque h3{font-size:1.4rem;}
+  .noticia p.resumo{color:var(--pedra-media); font-size:0.88rem; flex:1;}
+  .leia-mais{font-size:0.82rem; font-weight:600; color:var(--verde-serra); display:inline-flex; align-items:center; gap:6px;}
+
+  /* ---------- PREFEITURA / GESTÃO ---------- */
+  #gestao{background:var(--creme-pedra);}
+  .gestao-grid{display:grid; grid-template-columns:0.6fr 1.4fr; gap:56px; align-items:center;}
+  .retrato{
+    aspect-ratio:4/5; border-radius:var(--radius); background:linear-gradient(160deg,var(--verde-serra),var(--verde-serra-escuro));
+    display:flex; align-items:flex-end; padding:22px; position:relative; overflow:hidden;
+  }
+  .retrato svg{position:absolute; inset:0; width:100%; height:100%; opacity:.5;}
+  .retrato .rotulo{position:relative; color:var(--branco-neblina);}
+  .retrato .rotulo strong{display:block; font-family:'Fraunces',serif; font-size:1.1rem;}
+  .retrato .rotulo span{font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--dourado-claro); text-transform:uppercase;}
+  .gestao-texto p{color:var(--pedra-media); margin-bottom:16px; font-size:1rem;}
+  .assinatura{margin-top:22px; font-family:'Fraunces', serif; font-style:italic; color:var(--verde-serra); font-size:1.2rem;}
+  .mini-equipe{display:flex; gap:30px; margin-top:30px; flex-wrap:wrap;}
+  .mini-equipe div strong{display:block; font-size:0.92rem; color:var(--tinta);}
+  .mini-equipe div span{font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--pedra-media); text-transform:uppercase;}
+
+  /* ---------- CONTATO ---------- */
+  #contato{background:var(--verde-serra); color:var(--branco-neblina);}
+  .contato-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  #contato .eyebrow{color:var(--dourado-claro);}
+  #contato .eyebrow::before{background:var(--dourado-claro);}
+  #contato h2{color:var(--branco-neblina); font-size:clamp(1.9rem,3vw,2.4rem); margin-top:14px; margin-bottom:18px;}
+  #contato p.lead{color:rgba(255,253,248,.75); margin-bottom:30px; max-width:44ch;}
+  .lista-contato li{display:flex; gap:14px; padding:14px 0; border-top:1px solid rgba(255,253,248,.15); font-size:0.94rem;}
+  .lista-contato li:last-child{border-bottom:1px solid rgba(255,253,248,.15);}
+  .lista-contato svg{width:18px; height:18px; flex-shrink:0; margin-top:2px; stroke:var(--dourado-claro);}
+  .lista-contato b{display:block; font-size:0.68rem; font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--dourado-claro); margin-bottom:2px;}
+  .lista-contato span{color:rgba(255,253,248,.85);}
+
+  .form-contato{background:var(--branco-neblina); border-radius:var(--radius); padding:34px;}
+  .form-contato h3{color:var(--verde-serra-escuro); margin-bottom:20px;}
+  .campo{margin-bottom:16px; display:flex; flex-direction:column; gap:6px;}
+  .campo label{font-size:0.78rem; font-weight:600; color:var(--pedra-media);}
+  .campo input, .campo select, .campo textarea{
+    padding:11px 13px; border:1px solid var(--linha); border-radius:var(--radius);
+    font-family:inherit; font-size:0.92rem; background:var(--creme-pedra); color:var(--tinta);
+  }
+  .campo input:focus, .campo select:focus, .campo textarea:focus{outline:2px solid var(--dourado-cafe); outline-offset:1px;}
+  .form-contato button{width:100%; justify-content:center; border:none;}
+  .msg-envio{font-size:0.85rem; margin-top:12px; color:var(--verde-serra); display:none;}
+  .msg-envio.mostrar{display:block;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--verde-serra-escuro); color:rgba(255,253,248,.6); padding:44px 0 24px;}
+  .footer-grid{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; padding-bottom:30px; border-bottom:1px solid rgba(255,253,248,.12);}
+  .footer-marca{display:flex; align-items:center; gap:12px;}
+  .footer-marca strong{color:var(--branco-neblina); font-family:'Fraunces',serif; font-size:1.05rem;}
+  .footer-menus{display:flex; gap:56px; flex-wrap:wrap;}
+  .footer-menus h5{font-family:'JetBrains Mono', monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:.08em; color:var(--dourado-claro); margin-bottom:14px;}
+  .footer-menus ul{display:flex; flex-direction:column; gap:9px;}
+  .footer-menus a{font-size:0.86rem; color:rgba(255,253,248,.68); transition:color .2s;}
+  .footer-menus a:hover{color:var(--branco-neblina);}
+  .footer-base{display:flex; justify-content:space-between; padding-top:22px; font-size:0.76rem; flex-wrap:wrap; gap:8px;}
+  .selo-demo{
+    background:var(--dourado-cafe); color:var(--verde-serra-escuro); font-family:'JetBrains Mono',monospace;
+    font-size:0.68rem; padding:3px 9px; border-radius:3px; font-weight:600; letter-spacing:.04em;
+  }
+
+  @media (max-width:980px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-arte{min-height:220px; order:-1;}
+    .cidade-grid, .gestao-grid, .contato-grid, .roteiro{grid-template-columns:1fr;}
+    .grade-turismo{grid-template-columns:repeat(2,1fr);}
+    .grade-servicos{grid-template-columns:repeat(2,1fr);}
+    .grade-noticias{grid-template-columns:1fr 1fr;}
+    .agenda{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:620px){
+    .hero-stats{grid-template-columns:1fr; gap:14px;}
+    .hero-stats div + div{border-left:none; padding-left:0; border-top:1px solid rgba(255,253,248,.18); padding-top:14px;}
+    .grade-turismo{grid-template-columns:1fr;}
+    .grade-servicos{grid-template-columns:1fr;}
+    .grade-noticias{grid-template-columns:1fr;}
+    .agenda{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+    .roteiro{padding:30px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="wrap">
+      <span>Prefeitura Municipal de Angelópolis — Serra Azul, MG</span>
+      <span><a href="#contato">Ouvidoria</a> · <a href="#contato">Portal da Transparência</a> · <a href="#servicos-rapidos">Acesso rápido</a></span>
+    </div>
+  </div>
+  <nav class="principal wrap">
+    <a href="#inicio" class="marca">
+      <svg class="brasao" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 3 L43 12 V24 C43 35 35 42 24 45 C13 42 5 35 5 24 V12 Z" fill="#0F4C43" stroke="#C08A28" stroke-width="1.5"/>
+        <path d="M14 30 L20 18 L24 26 L28 16 L34 30" stroke="#E3B45B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="12" r="2.4" fill="#E3B45B"/>
+      </svg>
+      <span class="marca-texto">
+        <strong>Angelópolis</strong>
+        <span>Prefeitura Municipal</span>
+      </span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="menu" id="menuPrincipal">
+      <a href="#cidade">A Cidade</a>
+      <a href="turismo.html">Turismo</a>
+      <a href="#secretarias">Secretarias</a>
+      <a href="#noticias">Notícias</a>
+      <a href="#gestao">Prefeitura</a>
+      <a href="#contato" class="btn btn-linha">Fale Conosco</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-conteudo">
+      <p class="eyebrow">Portal oficial · Gestão 2025–2028</p>
+      <h1 class="reveal">Onde a serra encontra o <em>cafezal</em>, e a cidade encontra você</h1>
+      <p class="lead reveal">Bem-vindo a Angelópolis: cachoeiras, arquitetura histórica e uma prefeitura de portas abertas. Aqui você encontra serviços municipais, notícias e o melhor roteiro turístico da Serra Azul.</p>
+      <div class="hero-cta reveal">
+        <a href="turismo.html" class="btn btn-primario">Explorar o turismo</a>
+        <a href="#servicos-rapidos" class="btn btn-fantasma">Serviços ao cidadão</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div>
+          <strong>1897</strong>
+          <span>Ano de fundação</span>
+        </div>
+        <div>
+          <strong>42.360</strong>
+          <span>Habitantes (est. 2026)</span>
+        </div>
+        <div>
+          <strong>980 m</strong>
+          <span>Altitude média</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-arte reveal">
+      <svg viewBox="0 0 420 420" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração da serra e cachoeira de Angelópolis">
+        <path d="M0 260 L60 190 L120 250 L180 160 L240 240 L300 180 L360 250 L420 210 L420 420 L0 420 Z" fill="#0A332D"/>
+        <path d="M0 300 L70 240 L140 290 L210 220 L280 280 L350 230 L420 270 L420 420 L0 420 Z" fill="#0F4C43" opacity="0.85"/>
+        <path d="M175 150 L192 260 L158 260 Z" fill="#E3B45B" opacity="0.9"/>
+        <line class="rio" x1="175" y1="150" x2="175" y2="330" stroke="#FFFDF8" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+        <line class="rio" x1="168" y1="150" x2="168" y2="330" stroke="#FFFDF8" stroke-width="2" stroke-linecap="round" opacity="0.55" style="animation-delay:-.6s"/>
+        <line class="rio" x1="182" y1="150" x2="182" y2="330" stroke="#FFFDF8" stroke-width="2" stroke-linecap="round" opacity="0.55" style="animation-delay:-1.2s"/>
+        <rect x="150" y="330" width="50" height="18" rx="2" fill="#63705F" opacity="0.5"/>
+        <circle cx="330" cy="70" r="34" fill="#E3B45B" opacity="0.9"/>
+        <rect x="255" y="255" width="16" height="34" fill="#F6F1E7" opacity="0.9"/>
+        <polygon points="247,255 279,255 263,232" fill="#C08A28"/>
+        <rect x="261" y="266" width="4" height="8" fill="#0A332D"/>
+      </svg>
+    </div>
+  </div>
+  <div class="divisor">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 40 L100 10 L220 45 L340 15 L460 40 L600 5 L740 42 L860 18 L980 44 L1100 12 L1200 38 L1200 60 L0 60 Z" fill="#F6F1E7"/>
+    </svg>
+  </div>
+</section>
+
+<section id="cidade">
+  <div class="wrap cidade-grid">
+    <div class="cidade-texto reveal">
+      <p class="eyebrow">A cidade</p>
+      <h2 style="margin:14px 0 22px;">Uma cidade serrana com alma de interior</h2>
+      <p>Encravada entre a Serra Azul e o Vale do Café, Angelópolis nasceu como pouso de tropeiros no fim do século XIX e cresceu junto às lavouras de café e às nascentes que ainda abastecem toda a região.</p>
+      <p>Hoje, o município equilibra a preservação do casario colonial do Centro Histórico com uma economia voltada ao turismo de natureza, à agricultura familiar e a um polo crescente de artesanato regional.</p>
+      <p>A administração municipal atua com foco em transparência, mobilidade sustentável e valorização do patrimônio cultural — princípios que orientam cada secretaria da Prefeitura.</p>
+    </div>
+    <ul class="linha-tempo reveal">
+      <li>
+        <b>1897</b>
+        <span>Fundação do povoado de Angelópolis, à margem do Ribeirão das Antas.</span>
+      </li>
+      <li>
+        <b>1924</b>
+        <span>Elevação à categoria de município e construção da Igreja Matriz de Santo Antônio.</span>
+      </li>
+      <li>
+        <b>1968</b>
+        <span>Chegada da rodovia estadual, impulsionando o escoamento da produção cafeeira.</span>
+      </li>
+      <li>
+        <b>2009</b>
+        <span>Criação do Parque Municipal das Araucárias e início do plano de turismo sustentável.</span>
+      </li>
+      <li>
+        <b>2026</b>
+        <span>Angelópolis recebe o selo estadual de Destino Turístico Sustentável.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="secretarias">
+  <div class="wrap">
+    <div class="cabecalho-secao reveal">
+      <p class="eyebrow">Serviços ao cidadão</p>
+      <h2>Secretarias Municipais</h2>
+      <p>Acesse diretamente a secretaria responsável pelo seu serviço. Todos os canais contam com atendimento presencial e protocolo online.</p>
+    </div>
+    <div class="grade-servicos reveal" id="servicos-rapidos">
+      <a class="servico" href="#contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21c4-4 7-7.5 7-11a7 7 0 10-14 0c0 3.5 3 7 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <h4>Secretaria de Saúde</h4>
+        <p>Agendamento em UBS, campanhas de vacinação e farmácia municipal.</p>
+      </a>
+      <a class="servico" href="#contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 6l8-3 8 3-8 3-8-3z"/><path d="M4 6v9l8 3 8-3V6"/></svg>
+        <h4>Secretaria de Educação</h4>
+        <p>Matrículas na rede municipal, transporte escolar e merenda.</p>
+      </a>
+      <a class="servico" href="turismo.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg>
+        <h4>Secretaria de Turismo</h4>
+        <p>Roteiros oficiais, apoio a guias locais e eventos turísticos.</p>
+      </a>
+      <a class="servico" href="#contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3v6M12 21v-6M4 12h4M16 12h4"/><circle cx="12" cy="12" r="3"/></svg>
+        <h4>Meio Ambiente</h4>
+        <p>Licenciamento ambiental, coleta seletiva e áreas de preservação.</p>
+      </a>
+      <a class="servico" href="#contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="10" width="18" height="8" rx="1"/><path d="M7 10V6h10v4"/></svg>
+        <h4>Obras e Infraestrutura</h4>
+        <p>Pavimentação, iluminação pública e regularização de imóveis.</p>
+      </a>
+      <a class="servico" href="#contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/></svg>
+        <h4>Assistência Social</h4>
+        <p>CRAS, benefícios sociais e programas de apoio à família.</p>
+      </a>
+      <a class="servico" href="#contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 19V9l8-5 8 5v10"/><path d="M9 19v-6h6v6"/></svg>
+        <h4>Cultura</h4>
+        <p>Museu Municipal, editais culturais e oficinas de artesanato.</p>
+      </a>
+      <a class="servico" href="#contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+        <h4>Segurança Pública</h4>
+        <p>Guarda municipal, defesa civil e central de emergência 153.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="noticias">
+  <div class="wrap">
+    <div class="cabecalho-secao reveal">
+      <p class="eyebrow">Últimas notícias</p>
+      <h2>O que está acontecendo em Angelópolis</h2>
+    </div>
+    <div class="grade-noticias">
+      <a class="noticia destaque reveal" href="#">
+        <svg class="capa" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="230" fill="#0F4C43"/>
+          <path d="M0 180 L100 110 L200 170 L300 90 L400 150 L400 230 L0 230 Z" fill="#0A332D"/>
+          <rect x="150" y="90" width="40" height="40" fill="#F6F1E7"/>
+          <polygon points="145,90 195,90 170,65" fill="#C08A28"/>
+        </svg>
+        <div class="conteudo">
+          <span class="data-noticia">08 de agosto de 2026</span>
+          <h3>Prefeitura inaugura novo Centro de Visitantes na Serra Azul</h3>
+          <p class="resumo">Espaço conta com exposição sobre a geologia local, ponto de informações turísticas e mirante coberto — investimento de R$ 1,2 milhão.</p>
+          <span class="leia-mais">Leia a matéria completa →</span>
+        </div>
+      </a>
+      <a class="noticia reveal" href="#">
+        <svg class="capa" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="170" fill="#C08A28"/>
+          <circle cx="200" cy="85" r="60" fill="#E3B45B" opacity="0.6"/>
+        </svg>
+        <div class="conteudo">
+          <span class="data-noticia">29 de julho de 2026</span>
+          <h3>Angelópolis recebe selo de Destino Turístico Sustentável</h3>
+          <p class="resumo">Reconhecimento estadual valoriza práticas de preservação ambiental adotadas pelo município nos últimos cinco anos.</p>
+          <span class="leia-mais">Leia mais →</span>
+        </div>
+      </a>
+      <a class="noticia reveal" href="#">
+        <svg class="capa" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="170" fill="#63705F"/>
+          <rect x="60" y="70" width="280" height="20" fill="#0A332D" opacity="0.5"/>
+          <rect x="60" y="100" width="180" height="20" fill="#0A332D" opacity="0.5"/>
+        </svg>
+        <div class="conteudo">
+          <span class="data-noticia">20 de julho de 2026</span>
+          <h3>Obras de revitalização do Centro Histórico avançam</h3>
+          <p class="resumo">Nova pavimentação em pedra e fiação subterrânea devem ser concluídas até outubro, antes do Festival das Cachoeiras.</p>
+          <span class="leia-mais">Leia mais →</span>
+        </div>
+      </a>
+      <a class="noticia reveal" href="#">
+        <svg class="capa" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="170" fill="#0A332D"/>
+          <circle cx="130" cy="85" r="40" fill="#C08A28"/>
+          <circle cx="270" cy="85" r="40" fill="#E3B45B" opacity="0.7"/>
+        </svg>
+        <div class="conteudo">
+          <span class="data-noticia">14 de julho de 2026</span>
+          <h3>Matrículas abertas para oficinas de artesanato municipal</h3>
+          <p class="resumo">Secretaria de Cultura oferece 120 vagas gratuitas em cerâmica, tecelagem e entalhe em madeira.</p>
+          <span class="leia-mais">Leia mais →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="gestao">
+  <div class="wrap gestao-grid">
+    <div class="retrato reveal">
+      <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="90" r="46" fill="#F6F1E7" opacity="0.15"/>
+        <path d="M40 250 Q100 170 160 250 Z" fill="#F6F1E7" opacity="0.12"/>
+      </svg>
+      <div class="rotulo">
+        <strong>Carlos Eduardo Martins</strong>
+        <span>Prefeito Municipal</span>
+      </div>
+    </div>
+    <div class="gestao-texto reveal">
+      <p class="eyebrow">Gestão municipal</p>
+      <h2 style="margin:14px 0 20px; font-size:clamp(1.7rem,2.6vw,2.2rem);">Uma prefeitura de portas abertas</h2>
+      <p>"Angelópolis cresce respeitando o que sempre foi sua maior riqueza: a serra, a água e as pessoas. Nosso compromisso é entregar serviços públicos de qualidade e transformar o turismo em desenvolvimento para todos os moradores."</p>
+      <p>A atual gestão (2025–2028) tem como prioridades a revitalização do Centro Histórico, a ampliação da rede de saneamento rural e o fortalecimento do turismo de base comunitária.</p>
+      <p class="assinatura">— Carlos Eduardo Martins, Prefeito</p>
+      <div class="mini-equipe">
+        <div>
+          <strong>Ana Beatriz Coutinho</strong>
+          <span>Vice-Prefeita</span>
+        </div>
+        <div>
+          <strong>Fernanda Ribeiro Lima</strong>
+          <span>Sec. de Turismo</span>
+        </div>
+        <div>
+          <strong>Rodrigo Nascimento Alves</strong>
+          <span>Sec. de Obras</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap contato-grid">
+    <div class="reveal">
+      <p class="eyebrow">Fale com a Prefeitura</p>
+      <h2>Atendimento ao cidadão</h2>
+      <p class="lead">Dúvidas, solicitações de serviços ou sugestões para o turismo local — nossa equipe responde em até 2 dias úteis.</p>
+      <ul class="lista-contato">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21c4-4 7-7.5 7-11a7 7 0 10-14 0c0 3.5 3 7 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <div><b>Endereço</b><span>Praça Angelo Bonetti, 120 — Centro, Angelópolis/MG — CEP 37.900-000</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.2 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8.1 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.8 2.2z"/></svg>
+          <div><b>Telefone / WhatsApp</b><span>(35) 3421-0100</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
+          <div><b>E-mail</b><span>contato@angelopolis.mg.gov.br</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+          <div><b>Horário de atendimento</b><span>Segunda a sexta, 8h às 17h</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <form class="form-contato reveal" id="formContato">
+      <h3>Envie sua mensagem</h3>
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" required placeholder="Seu nome">
+      </div>
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required placeholder="voce@exemplo.com">
+      </div>
+      <div class="campo">
+        <label for="assunto">Assunto</label>
+        <select id="assunto">
+          <option>Turismo e eventos</option>
+          <option>Serviços municipais</option>
+          <option>Ouvidoria / reclamação</option>
+          <option>Imprensa</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" rows="4" required placeholder="Como podemos ajudar?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primario">Enviar mensagem</button>
+      <p class="msg-envio" id="msgEnvio">Mensagem enviada — este é um protótipo de demonstração, nenhum dado foi transmitido.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-marca">
+        <svg class="brasao" viewBox="0 0 48 48" width="38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 3 L43 12 V24 C43 35 35 42 24 45 C13 42 5 35 5 24 V12 Z" fill="#0F4C43" stroke="#C08A28" stroke-width="1.5"/>
+          <path d="M14 30 L20 18 L24 26 L28 16 L34 30" stroke="#E3B45B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <strong>Prefeitura de Angelópolis</strong>
+          <p style="font-size:0.78rem; margin-top:4px;">Serra Azul — Minas Gerais</p>
+        </div>
+      </div>
+      <div class="footer-menus">
+        <div>
+          <h5>Município</h5>
+          <ul>
+            <li><a href="#cidade">A Cidade</a></li>
+            <li><a href="#gestao">Prefeitura</a></li>
+            <li><a href="#noticias">Notícias</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Turismo</h5>
+          <ul>
+            <li><a href="turismo.html#pontos">Pontos turísticos</a></li>
+            <li><a href="turismo.html#roteiro">Roteiro de 2 dias</a></li>
+            <li><a href="turismo.html#agenda">Agenda de eventos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Serviços</h5>
+          <ul>
+            <li><a href="#secretarias">Secretarias</a></li>
+            <li><a href="#contato">Ouvidoria</a></li>
+            <li><a href="#contato">Fale conosco</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Prefeitura Municipal de Angelópolis. Cidade fictícia — conteúdo de demonstração.</span>
+      <span class="selo-demo">PROTÓTIPO SAAS · DADOS FICTÍCIOS</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Menu mobile
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('menuPrincipal');
+  toggle.addEventListener('click', () => {
+    const aberto = menu.classList.toggle('aberto');
+    toggle.setAttribute('aria-expanded', aberto);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('aberto');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Reveal on scroll
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visivel');
+        observador.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observador.observe(el));
+
+  // Formulário de contato (demonstração — sem backend)
+  const form = document.getElementById('formContato');
+  const msg = document.getElementById('msgEnvio');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    msg.classList.add('mostrar');
+    form.reset();
+    setTimeout(() => msg.classList.remove('mostrar'), 5000);
+  });
+</script>
+
+</body>
+</html>
