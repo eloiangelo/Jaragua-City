@@ -165,6 +165,21 @@
   .hero-stats span{font-family:'JetBrains Mono', monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,253,248,.65);}
 
   .hero-arte{position:relative; height:100%; min-height:320px;}
+  .chamada-jogo{
+    display:flex; align-items:center; gap:14px; margin-top:24px;
+    padding:14px 18px; background:rgba(255,253,248,.08);
+    border:1px solid rgba(255,253,248,.2); border-radius:var(--radius);
+    transition:background .25s ease, transform .25s ease;
+  }
+  .chamada-jogo:hover{background:rgba(255,253,248,.14); transform:translateY(-2px);}
+  .chamada-jogo-icone{font-size:1.6rem; flex-shrink:0;}
+  .chamada-jogo strong{
+    display:block; color:var(--branco-neblina); font-family:'Fraunces',serif;
+    font-weight:600; font-size:1rem;
+  }
+  .chamada-jogo-sub{
+    display:block; color:rgba(255,253,248,.68); font-size:0.8rem; margin-top:2px;
+  }
   .rio{
     stroke-dasharray:6 10; animation:fluir 3.4s linear infinite;
   }
@@ -381,6 +396,13 @@
         <polygon points="247,255 279,255 263,232" fill="#C08A28"/>
         <rect x="261" y="266" width="4" height="8" fill="#0A332D"/>
       </svg>
+      <a href="turismo.html#jogo-perseguicao" class="chamada-jogo reveal">
+        <span class="chamada-jogo-icone">🎮</span>
+        <span>
+          <strong>Conheça Jaraguá jogando!</strong>
+          <span class="chamada-jogo-sub">Perseguição pelas ruas reais da cidade →</span>
+        </span>
+      </a>
     </div>
   </div>
   <div class="divisor">

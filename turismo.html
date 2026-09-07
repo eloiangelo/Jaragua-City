@@ -76,6 +76,76 @@
   .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
   .reveal.visivel{opacity:1; transform:none;}
 
+  /* Destaque do jogo */
+  #jogo-perseguicao{background:var(--creme-pedra); padding:0 0 80px;}
+  .jogo-caixa{
+    background:var(--verde-serra); color:var(--branco-neblina);
+    border-radius:var(--radius); padding:48px;
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:start;
+  }
+  .jogo-caixa h2{color:var(--branco-neblina); font-size:clamp(1.7rem,2.8vw,2.3rem); margin-bottom:14px;}
+  .jogo-caixa p.lead{color:rgba(255,253,248,.82); font-size:0.98rem; margin-bottom:24px; max-width:44ch;}
+  .jogo-tags{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px;}
+  .jogo-tag{
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; text-transform:uppercase;
+    letter-spacing:.06em; padding:6px 12px; border-radius:999px;
+    border:1px solid rgba(255,253,248,.3); color:rgba(255,253,248,.85);
+  }
+  .jogo-botoes{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn-jogar-grande{
+    display:flex; align-items:center; justify-content:center;
+    width:100%; padding:22px 24px; font-size:1.05rem; font-weight:700;
+    border-radius:var(--radius); margin-top:6px;
+  }
+
+  .jogo-lateral{display:flex; flex-direction:column; gap:20px;}
+
+  /* Card de ranking, no estilo visual do resto do site */
+  .jogo-ranking-card{
+    background:var(--branco-neblina); border-radius:var(--radius);
+    overflow:hidden; color:var(--tinta); box-shadow:var(--sombra);
+  }
+  .jogo-ranking-cabecalho{
+    padding:16px 20px; background:var(--dourado-cafe); color:var(--branco-neblina);
+    font-family:'Fraunces',serif; font-weight:600; font-size:0.98rem;
+  }
+  .jogo-ranking-card table{width:100%; border-collapse:collapse;}
+  .jogo-ranking-card th, .jogo-ranking-card td{
+    text-align:left; padding:10px 16px; font-size:0.84rem; border-bottom:1px solid var(--linha);
+  }
+  .jogo-ranking-card th{
+    font-family:'JetBrains Mono', monospace; font-size:0.62rem; text-transform:uppercase;
+    letter-spacing:.06em; color:var(--pedra-media); background:var(--creme-pedra);
+  }
+  .jogo-ranking-card tr:last-child td{border-bottom:none;}
+  .jogo-cor-carro{
+    display:inline-block; width:9px; height:9px; border-radius:50%;
+    margin-right:7px; vertical-align:middle;
+  }
+  .jogo-vazio{padding:18px 16px; color:var(--pedra-media); font-size:0.86rem;}
+
+  @media (max-width:880px){
+    .jogo-caixa{grid-template-columns:1fr; padding:32px;}
+  }
+
+  /* Área do jogo — mesma largura do conteúdo da página (dentro do .wrap) */
+  .jogo-area-embed{display:none; margin-top:28px;}
+  .jogo-area-embed.mostrar{display:block;}
+  .jogo-frame-wrap{
+    position:relative; width:100%; aspect-ratio:16/9; background:#000;
+    max-height:78vh; border-radius:var(--radius); overflow:hidden; box-shadow:var(--sombra);
+  }
+  .jogo-frame-wrap iframe{width:100%; height:100%; border:none; display:block;}
+  .jogo-frame-wrap:fullscreen{max-height:none; aspect-ratio:auto; border-radius:0;}
+  .jogo-controles{position:absolute; top:62px; right:16px; z-index:10; display:flex; gap:10px;}
+  .jogo-controle{
+    width:42px; height:42px; border-radius:50%; border:none;
+    background:rgba(10,51,45,.75); color:var(--branco-neblina); font-size:1.15rem;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s ease;
+  }
+  .jogo-controle:hover{background:rgba(10,51,45,.92);}
+
   #pontos{background:var(--creme-pedra);}
   .turismo-topo{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:36px;}
   .filtros{display:flex; gap:10px; flex-wrap:wrap;}
@@ -116,35 +186,7 @@
   .footer-simples .marca-footer{display:flex; align-items:center; gap:10px;}
   .footer-simples .marca-footer strong{color:var(--branco-neblina); font-family:'Fraunces',serif; font-size:0.98rem;}
 
-  #conheca{background:var(--branco-neblina); border-bottom:1px solid var(--linha);}
-  .conheca-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;}
-  .chips-jogo{display:flex; gap:10px; flex-wrap:wrap; margin:22px 0 28px;}
-  .chip{
-    display:inline-flex; align-items:center; gap:7px;
-    font-family:'JetBrains Mono', monospace; font-size:0.72rem;
-    padding:8px 14px; border-radius:999px; background:var(--creme-pedra);
-    border:1px solid var(--linha); color:var(--pedra-media);
-  }
-  .conheca-cta{display:flex; align-items:center; gap:16px; flex-wrap:wrap;}
-  .badge-em-breve{
-    font-family:'JetBrains Mono', monospace; font-size:0.7rem; text-transform:uppercase;
-    letter-spacing:.06em; color:var(--dourado-cafe); font-weight:600;
-  }
-  .mapa-caixa{
-    position:relative; aspect-ratio:16/9; border-radius:var(--radius);
-    border:1px solid var(--linha); background:var(--creme-pedra);
-    overflow:hidden; box-shadow:var(--sombra);
-  }
-  .mapa-caixa img{width:100%; height:100%; object-fit:cover; display:block;}
-  .selo-jogo{
-    position:absolute; top:14px; left:14px;
-    background:var(--verde-serra); color:var(--branco-neblina);
-    font-family:'JetBrains Mono', monospace; font-size:0.66rem; font-weight:600;
-    padding:6px 12px; border-radius:999px; display:flex; align-items:center; gap:6px;
-  }
-
   @media (max-width:980px){
-    .conheca-grid{grid-template-columns:1fr;}
     .grade-turismo{grid-template-columns:repeat(2,1fr);}
     .roteiro-caixa{grid-template-columns:1fr; padding:32px;}
     .agenda{grid-template-columns:repeat(2,1fr);}
@@ -195,6 +237,43 @@
   </div>
 </div>
 
+<section id="jogo-perseguicao">
+  <div class="wrap">
+    <div class="jogo-caixa reveal">
+      <div class="jogo-texto">
+        <p class="eyebrow" style="color:#E3B45B;">Jogue e explore</p>
+        <h2>Conheça Jaraguá City jogando!</h2>
+        <p class="lead">Em vez de só ler sobre a cidade, você vai correr por ela. Um jogo de perseguição policial acelerado pelas ruas reais de Jaraguá City — cada curva, praça e bairro do mapa turístico vira parte da fuga. Quem escapa?</p>
+        <div class="jogo-tags">
+          <span class="jogo-tag">🚓 Perseguição policial</span>
+          <span class="jogo-tag">🗺️ Ruas reais da cidade</span>
+          <span class="jogo-tag">🏆 Quem pontua mais vence</span>
+        </div>
+        <div class="jogo-botoes">
+          <button id="btn-jogar" class="btn btn-primario btn-jogar-grande">▶ Jogar Perseguição em Jaraguá City</button>
+        </div>
+      </div>
+      <div class="jogo-lateral">
+        <div class="jogo-ranking-card">
+          <div class="jogo-ranking-cabecalho">🏆 Top 10 — Jaraguá City</div>
+          <table>
+            <thead><tr><th>#</th><th>Jogador</th><th>Pontos</th><th>Tempo</th></tr></thead>
+            <tbody id="tabela-recordes"><tr><td colspan="4" class="jogo-vazio">Carregando...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="jogo-area-embed" id="area-jogo">
+      <div class="jogo-frame-wrap" id="jogo-frame-wrap">
+        <div class="jogo-controles">
+          <button class="jogo-controle" id="btn-maximizar" aria-label="Tela cheia">⛶</button>
+          <button class="jogo-controle" id="btn-fechar-jogo" aria-label="Fechar jogo">✕</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="pontos">
   <div class="wrap">
@@ -306,30 +385,6 @@
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<section id="conheca">
-  <div class="wrap conheca-grid">
-    <div class="reveal">
-      <p class="eyebrow">Descubra a cidade</p>
-      <h2 style="font-size:clamp(1.7rem,3vw,2.3rem); margin:14px 0 18px;">Conheça Jaraguá City jogando!</h2>
-      <p style="color:var(--pedra-media); font-size:1rem; max-width:52ch;">Em vez de só ler sobre a cidade, você vai <strong style="color:var(--verde-serra-escuro);">correr por ela</strong>. Um jogo de perseguição policial acelerado pelas ruas reais de Jaraguá City — cada curva, praça e bairro do mapa turístico vira parte da fuga. <em>Quem escapa?</em></p>
-      <div class="chips-jogo">
-        <span class="chip">🚓 Perseguição policial</span>
-        <span class="chip">🗺️ Ruas reais da cidade</span>
-        <span class="chip">🏁 Quem pontua mais vence</span>
-      </div>
-      <div class="conheca-cta">
-        <a href="#" class="btn btn-primario">Jogar Perseguição em Jaraguá City</a>
-        <a href="#" class="btn btn-linha">🏆 Top 10 jogadores</a>
-      </div>
-      <span class="badge-em-breve" style="display:inline-block; margin-top:16px;">Em desenvolvimento · Powered by Claude</span>
-    </div>
-    <div class="mapa-caixa reveal">
-      <span class="selo-jogo">🎮 Modo Jogo</span>
-      <img src="conheca-jaragua-city.jpg" alt="Banner do jogo Conheça Jaraguá City: carro esportivo vermelho sobre o mapa ilustrado da cidade, com pontos marcados para encontrar">
     </div>
   </div>
 </section>
@@ -448,6 +503,96 @@
       });
     });
   });
+
+  // ======================================================
+  // Jogo Car Chase — específico de Jaraguá City
+  // ======================================================
+  const CIDADE_SLUG = "jaragua";
+  const CIDADE_CHAVE = "71add4b7-939c-4914-b0b9-c26a3a5adc6e";
+  const JOGO_URL = "https://jogo-car-chase.eloiangelo.workers.dev";
+  const SUPABASE_URL = "https://bmcgdokuhkxsqciegwlr.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_cY27T9sHx-F1rY8kc5nntA_SH4ClIZJ";
+
+  // Botão "Jogar": cria o iframe (se ainda não existir) e revela a área
+  // grande em largura total — SEM forçar tela cheia automaticamente.
+  document.getElementById('btn-jogar').addEventListener('click', () => {
+    const area = document.getElementById('area-jogo');
+    const wrap = document.getElementById('jogo-frame-wrap');
+
+    if (!wrap.querySelector('iframe')) {
+      const iframe = document.createElement('iframe');
+      iframe.src = `${JOGO_URL}/?cidade=${CIDADE_SLUG}&chave=${CIDADE_CHAVE}`;
+      iframe.setAttribute('allow', 'fullscreen; autoplay');
+      wrap.appendChild(iframe);
+    }
+
+    area.classList.add('mostrar');
+    area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // Botão "⛶": alterna entre tela cheia de verdade e o tamanho grande normal.
+  // Funciona igual em desktop e celular; no celular também tenta travar
+  // a orientação em paisagem ao entrar em tela cheia.
+  const btnMaximizar = document.getElementById('btn-maximizar');
+  const frameWrap = document.getElementById('jogo-frame-wrap');
+
+  btnMaximizar.addEventListener('click', async () => {
+    if (!document.fullscreenElement) {
+      try {
+        await frameWrap.requestFullscreen();
+        const ehMobile = window.matchMedia('(pointer: coarse)').matches;
+        if (ehMobile && screen.orientation && screen.orientation.lock) {
+          try { await screen.orientation.lock('landscape'); } catch (e) { /* iOS não suporta, tudo bem */ }
+        }
+      } catch (e) { /* navegador recusou — segue no tamanho normal, sem travar nada */ }
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    const emTelaCheia = document.fullscreenElement === frameWrap;
+    btnMaximizar.textContent = emTelaCheia ? '⤢' : '⛶';
+    btnMaximizar.setAttribute('aria-label', emTelaCheia ? 'Sair da tela cheia' : 'Tela cheia');
+  });
+
+  // Botão "✕": fecha o jogo (esconde a área) — útil para quem só estava
+  // curioso e decide desistir antes de jogar de verdade.
+  document.getElementById('btn-fechar-jogo').addEventListener('click', () => {
+    if (document.fullscreenElement === frameWrap) document.exitFullscreen();
+    document.getElementById('area-jogo').classList.remove('mostrar');
+    document.getElementById('btn-jogar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // Ranking carrega sozinho ao abrir a página (é só texto, custo baixo)
+  (async () => {
+    const corpo = document.getElementById('tabela-recordes');
+    try {
+      const url = `${SUPABASE_URL}/rest/v1/recordes_publicos` +
+        `?select=jogador,pontuacao,tempo_jogo,data,cor_carro&slug=eq.${CIDADE_SLUG}` +
+        `&order=pontuacao.desc&limit=10`;
+      const resp = await fetch(url, {
+        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
+      });
+      if (!resp.ok) throw new Error(`Status ${resp.status}`);
+      const dados = await resp.json();
+
+      if (dados.length === 0) {
+        corpo.innerHTML = '<tr><td colspan="4" class="jogo-vazio">Seja o primeiro a jogar!</td></tr>';
+        return;
+      }
+
+      corpo.innerHTML = dados.map((r, i) => {
+        const min = Math.floor((r.tempo_jogo || 0) / 60);
+        const seg = Math.round((r.tempo_jogo || 0) % 60);
+        const tempo = min > 0 ? `${min}m ${seg}s` : `${seg}s`;
+        const bolinha = `<span class="jogo-cor-carro" style="background:${r.cor_carro || '#999'}"></span>`;
+        return `<tr><td>${i + 1}</td><td>${bolinha}${r.jogador}</td><td>${r.pontuacao}</td><td>${tempo}</td></tr>`;
+      }).join('');
+    } catch (err) {
+      corpo.innerHTML = '<tr><td colspan="4" class="jogo-vazio">Ranking indisponível no momento.</td></tr>';
+    }
+  })();
 </script>
 
 </body>
